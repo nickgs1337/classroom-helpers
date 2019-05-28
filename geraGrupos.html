@@ -1,0 +1,104 @@
+<html>
+    <head>
+            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    </head>
+<script>
+    var students = [
+        "Ademir Barbosa Junior",
+        "Alessandra Herminia Spioni Estevao",
+        "Andre Celestino Dos Santos",
+        "Breno Jose Franzini Silva",
+        "Bruna Duarte",
+        "Bruno Caio Dias",
+        "Caio Cesar Almeida Guimaraes",
+        "Cleverson Saraiva Pires",
+        "Denes Leal Dos Santos",
+        "Elaine Kubagawa Ramos",
+        "Francini Da Silva Glinglani",
+        "Geanderson Vieira Galdino",
+        "Giovanni Montezano",
+        "Henrique Alves De Oliveira Carvalho",
+        "Italo Di Palma Junior",
+        "Leonardo Zandomenico Vasconcellos",
+        "Marcella De Jesus Melero",
+        "Marcos Vinicius Mendes Caldeira",
+        "Oswaldo Massao Otake",
+        "Paloma Gouvea Leandro",
+        "Rafael Rodrigues De Assis",
+        "Renato Da Silva Teixeira",
+        "Rodrigo Puzzello Novo",
+        "Tamires Lopes Rivera",
+        "Tainara Trausi",
+        "Willy Leocadio Da Silva",
+        "Yasmin Cipelli De Barros",
+    ];
+
+    var gone = [];
+
+    function generate() {
+        while(students.length > 0) {
+            generateOne();
+        }
+    }
+
+    function generateOne() {
+        let student = pickOne();
+        if(student) {
+            students = students.filter((al) => {
+                return al != student;
+            });
+
+            gone.push(student);
+            updateGone();
+        }else{
+            alert("chegamos ao fim!");
+        }
+    }
+
+    function pickOne() {
+        if(students.length > 0) {
+            return students[parseInt(Math.random() * students.length)];
+        }
+    }
+
+    function updateGone() {
+        result = '';
+        for(al in gone) {
+            if(al % 5 == 0) {
+                result += '<li class="group">------------Grupo ' + ((al / 5) +1) + '------------</li>';
+            }
+            result += '<li>' + gone[al] + '</li>';
+        }
+        document.getElementById('gerados').innerHTML = result;
+    }
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+    li {
+        font-weight: bold;
+    }
+    .group{
+        background-color: #AAA;
+    }
+</style>
+<body style="float: left">
+    <div style="width: 100VW; height: 700VH; float: left">
+        <div  style="width: 50VW; height: 100VH; float: left">
+                <button onclick="generate()" style = "background-color: #FF3333; padding: 30px; color: #FFF; font-weight: bold; font-size: 4em;">
+                        Gera Grupos
+                </button>
+        </div>
+        <div style="width: 50VW; height: 100VH; float: left">
+            <h3>Já foram:</h3>
+            <ul id="gerados">
+                
+            </ul>
+        </div>
+    </div>
+        
+    </body>
+</html>
